@@ -1,5 +1,5 @@
 
-import  jwt from "jsonwebtoken"
+import  * as jwt from "jsonwebtoken"
 import { SECRETE_TOKEN_KEY } from "../config/constants";
 
 const verifyToken = (req, res, next) => {

@@ -1,7 +1,7 @@
-import bcrypt from "bcryptjs";
+import * as bcrypt from "bcryptjs";
 import * as express from 'express';
-import jwt from "jsonwebtoken";
-import mongoose from "mongoose";
+import * as jwt from "jsonwebtoken";
+import * as mongoose from "mongoose";
 import { SECRETE_TOKEN_KEY } from "./config/constants";
 import mongoDBConnection from "./config/database";
 import auth from './middleware/auth'
@@ -34,7 +34,7 @@ app.post("/register", async (req, res) => {
     try {
         // Get user input
         const { first_name, last_name, email, password } = req.body;
-        console.log(req)
+        console.log(req.body)
         // Validate user input
         if (!(email && password && first_name && last_name)) {
             return res.status(400).json({ message: "All input is required" });
@@ -43,6 +43,7 @@ app.post("/register", async (req, res) => {
         // check if user already exist
         // Validate if user exist in our database
         const oldUser = await User.findOne({ email });
+        console.log('****oldUser***',oldUser)
 
         if (oldUser) {
             return res.status(400).json({ message: "User Already Exist. Please Login" });
@@ -50,7 +51,7 @@ app.post("/register", async (req, res) => {
 
         //Encrypt user password
         let encryptedPassword = await bcrypt.hash(password, 10);
-
+        console.log('****encryptedPassword***',encryptedPassword)
         // Create user in our database
         const user = await User.create({
             first_name,
@@ -58,7 +59,7 @@ app.post("/register", async (req, res) => {
             email: email.toLowerCase(), // sanitize: convert email to lowercase
             password: encryptedPassword,
         });
-
+        console.log('****user***',user)
         // Create token
         const token = jwt.sign(
             { user_id: user._id, email },
@@ -119,7 +120,7 @@ app.post("/welcome", auth, (req, res) => {
     res.status(200).send("Welcome 🙌 ");
 });
 
-app.post("/ping", (req, res) => {
+app.get("/ping", (req, res) => {
     res.status(200).send("pong 🙌 ");
 });
 
@@ -129,7 +130,7 @@ app.get("/getallmovies", auth, async (req, res) => {
         res.status(200).json(movies)
     } catch (error) {
         console.error("get all movies error", error)
-        res.send(500).json(error)
+        res.status(500).json(error)
     }
 });
 app.post("/postmovies", auth, async (req, res, next) => {
@@ -140,7 +141,7 @@ app.post("/postmovies", auth, async (req, res, next) => {
         res.status(200).json({ message: "Posted Movies Successfully !!" })
     } catch (error) {
         console.error("Post movies error", error)
-        res.send(500).json({ error: error })
+        res.status(500).json({ error: error })
         next()
     }
 });
