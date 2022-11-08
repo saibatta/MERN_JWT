@@ -1,7 +1,7 @@
 import axios from "axios";
 // axios.defaults.headers.common['x-access-token'] = `${token}`
 export const login = async (data) => {
-    let URL = "http://localhost:4001/login";
+    let URL = "https://jwt-node-server.herokuapp.com/login";
     return axios
         .post(URL, data)
         .then((response) => response)
@@ -9,7 +9,7 @@ export const login = async (data) => {
 };
 
 export const signup = async (data) => {
-    let URL = "http://localhost:4001/register";
+    let URL = "https://jwt-node-server.herokuapp.com/register";
     return axios
         .post(URL, data)
         .then((response) => response)
@@ -17,7 +17,7 @@ export const signup = async (data) => {
 };
 
 export const logout = async (data) => {
-    let URL = "http://localhost:4001/logout";
+    let URL = "https://jwt-node-server.herokuapp.com/logout";
     return axios
         .post(URL, data)
         .then((response) => response)

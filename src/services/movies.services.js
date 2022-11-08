@@ -1,7 +1,7 @@
 import axios from "axios";
 axios.defaults.headers.common['x-access-token'] = localStorage.getItem("token");
 export const getAllMovies = async () => {
-    let URL = "http://localhost:4001/getallmovies";
+    let URL = "https://jwt-node-server.herokuapp.com/getallmovies";
     return axios
         .get(URL, {})
         .then((response) => response)
@@ -9,7 +9,7 @@ export const getAllMovies = async () => {
 };
 
 export const updateMovie = async (data) => {
-    let URL = "http://localhost:4001/updatemovie";
+    let URL = "https://jwt-node-server.herokuapp.com/updatemovie";
     return axios
         .put(URL, data)
         .then((response) => response)
@@ -17,7 +17,7 @@ export const updateMovie = async (data) => {
 };
 
 export const deleteMovie = async (id) => {
-    let URL = `http://localhost:4001/deletemovie/${id}`;
+    let URL = `https://jwt-node-server.herokuapp.com/deletemovie/${id}`;
     return axios
         .delete(URL)
         .then((response) => response)
