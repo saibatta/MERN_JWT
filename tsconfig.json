@@ -1,21 +1,24 @@
- {
+{
   "compilerOptions": {
-    "target": "esnext",
-    "strict": false,
-    "preserveConstEnums": true,
-    "noEmit": true,
-    "sourceMap": false,
-    "module":"commonjs",
-    "moduleResolution":"node",
-    "esModuleInterop": true, 
-    "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true, 
-    "isolatedModules": true, 
-    "resolveJsonModule":true,
-    "rootDir": "./",
+    "target": "es5",
+    "module": "commonjs",
     "outDir": "dist",
-    "allowJs": true,
-    "checkJs": true
+    "sourceMap": false,
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": ".",
+    "paths": {
+      "*": [
+        "node_modules/",
+      ],
+      "typings/*": [
+        "src/typings/*"
+      ]
+    },
   },
-  "exclude": ["node_modules", "**/*.test.ts"]
+  "include": [
+    "src/**/*.ts"
+  ],
+  "exclude": [
+    "src/test/**/*.spec.ts"
+  ]
 }

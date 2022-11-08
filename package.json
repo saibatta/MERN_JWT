@@ -6,8 +6,10 @@
   "scripts": {
     "dev": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "ts-node-dev src/index.ts",
-    "build": "esbuild index.ts --bundle --minify --sourcemap --platform=node --target=es2020 --outfile=dist/index.js"
+    "starttest": "ts-node-dev src/index.ts",
+    "buildtest": "esbuild index.ts --bundle --minify --sourcemap --platform=node --target=es2020 --outfile=dist/index.js",
+    "build": "rimraf dist && tsc",
+    "start": "node dist/index.js"
   },
   "keywords": [],
   "author": "sai",
