@@ -1,5 +1,5 @@
 
-import http from "http";
+import * as http from "http";
 import app from "./app";
 import { API_PORT } from "./config/constants";
 const server = http.createServer(app);

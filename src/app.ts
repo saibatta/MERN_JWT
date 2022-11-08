@@ -1,5 +1,5 @@
 import bcrypt from "bcryptjs";
-import express from 'express';
+import * as express from 'express';
 import jwt from "jsonwebtoken";
 import mongoose from "mongoose";
 import { SECRETE_TOKEN_KEY } from "./config/constants";
@@ -12,7 +12,7 @@ import { User } from "./model/user";
 const app = express();
 
 app.use((req, res, next) => {
-    const allowedOrigins = ['http://127.0.0.1:3000', 'http://localhost:3000'];
+    const allowedOrigins = ['http://127.0.0.1:3000', 'http://localhost:3000','https://jwt-node-client.herokuapp.com'];
     const origin = req.headers.origin;
     if (allowedOrigins.includes(origin)) {
         res.setHeader('Access-Control-Allow-Origin', origin);
@@ -119,6 +119,9 @@ app.post("/welcome", auth, (req, res) => {
     res.status(200).send("Welcome 🙌 ");
 });
 
+app.post("/ping", (req, res) => {
+    res.status(200).send("pong 🙌 ");
+});
 
 app.get("/getallmovies", auth, async (req, res) => {
     try {
@@ -172,4 +175,6 @@ app.post('/logout', auth, async (req, res, next) => {
         return res.status(500).json({ message: "User Session Logout failed", error })
     }
 })
+
+
 export default app;
